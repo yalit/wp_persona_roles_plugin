@@ -1,0 +1,42 @@
+body.post-type-persona #titlediv, 
+body.post-type-persona_group #titlediv, 
+body.post-type-persona_role #titlediv, 
+body.post-type-persona_affectation #titlediv,
+body.post-type-persona_parish #titlediv {
+    display: none;
+}
+
+.persona_details_form {
+    display: flex;;
+    align-items: center;
+    gap: 10px;
+}
+
+body.post-new-php input[type="number"], body.post-php input[type="number"] {
+    max-width: 5rem;
+}
+
+.form-line {
+    display: flex;
+    align-items: start;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &.top {
+        align-items: start;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    select[multiple] {
+        height: 100%;
+    }
+}
