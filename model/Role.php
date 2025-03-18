@@ -9,6 +9,7 @@ class Role
         public string $name,
         public string $code,
         public string $description,
+        public bool $active = false,
         public ?string $sequence = null,
         public ?string $legacyId = null,
     ) {}

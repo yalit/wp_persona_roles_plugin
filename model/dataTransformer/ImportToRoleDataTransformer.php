@@ -13,6 +13,7 @@ class ImportToRoleDataTransformer extends GenericDataTransformer
             sanitize_text_field(static::getProperty($data, 'nom_role', "")),
             sanitize_text_field(static::getProperty($data, 'code_role', "")),
             sanitize_text_field(static::getProperty($data, 'description_role', "")),
+            sanitize_text_field(static::getProperty($data, 'actif', "")),
             sanitize_text_field(static::getProperty($data, 'seq_role', "")),
             sanitize_text_field(static::getProperty($data, 'id', "")),
         );

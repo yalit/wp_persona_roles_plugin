@@ -21,6 +21,7 @@ class RoleType extends AbstractType
             'code' => ['Code', 'text'],
             'description' => ['Description', 'textarea'],
             'sequence' => ['Sequence', 'number'],
+            'active' => ['Actif ?', 'boolean'],
         ];
     }
 
