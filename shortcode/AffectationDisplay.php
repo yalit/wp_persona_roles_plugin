@@ -20,6 +20,10 @@ class AffectationDisplay
 
     public static function getImage(Affectation $affectation, DisplayData $display): string
     {
+        if (!$affectation->persona->rgpd) {
+            return '';
+        }
+
         return sprintf(
             "<div class=\"persona_image %s\"><img src=\"%s\" /></div>", 
             static::getClassInfo(ContentEnum::Image, $display), 
@@ -29,6 +33,10 @@ class AffectationDisplay
 
     public static function getName(Affectation $affectation, DisplayData $display): string
     {
+        if (!$affectation->persona->rgpd) {
+            return '';
+        }
+
         return sprintf(
             "<div class=\"persona_name %s\">%s %s</div>", 
             static::getClassInfo(ContentEnum::Name, $display), 
@@ -39,6 +47,10 @@ class AffectationDisplay
 
     public static function getAddress(Affectation $affectation, DisplayData $display): string
     {
+        if (!$affectation->persona->rgpd) {
+            return '';
+        }
+
         return sprintf(
             "<div class=\"persona_address %s\">%s</div>", 
             static::getClassInfo(ContentEnum::Address, $display), 
@@ -57,6 +69,10 @@ class AffectationDisplay
 
     public static function getPhone(Affectation $affectation, DisplayData $display): string
     {
+        if (!$affectation->persona->rgpd) {
+            return '';
+        }
+
         return sprintf(
             "<div class=\"persona_phone flex %s\"><span class=\"icon\">%s</span>%s</div>", 
             static::getClassInfo(ContentEnum::Phone, $display), 
@@ -67,6 +83,10 @@ class AffectationDisplay
 
     public static function getMobile(Affectation $affectation, DisplayData $display): string
     {
+        if (!$affectation->persona->rgpd) {
+            return '';
+        }
+
         return sprintf(
             "<div class=\"persona_mobile flex %s\"><span class=\"icon\">%s</span>%s</div>", 
             static::getClassInfo(ContentEnum::Phone, $display), 
@@ -77,6 +97,10 @@ class AffectationDisplay
 
     public static function getEmail(Affectation $affectation, DisplayData $display): string
     {
+        if (!$affectation->persona->rgpd) {
+            return '';
+        }
+
         return sprintf(
             "<div class=\"persona_email flex %s\"><span class=\"icon\">%s</span><a href=\"mailto:%s\">%s</a></div>", 
             static::getClassInfo(ContentEnum::Email, $display), 
