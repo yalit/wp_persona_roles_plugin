@@ -25,8 +25,9 @@ class PersonaType extends AbstractType
             'phone' => ['Fixe', 'text'],
             'mobile' => ['Mobile', 'text'],
             'address' => ['Adresse', 'text'],
+            'function' => ['Fonction', 'textarea'],
             'rgpd' => ['RGPD', 'boolean'],
-            'picture' => ['Photo', 'file']
+            'picture' => ['Photo', 'file'],
         ];
     }
 
@@ -53,7 +54,7 @@ class PersonaType extends AbstractType
         return array_merge($columns, [
             'email' => __('Email', 'persona-user-roles'),
             'phone' => __('Téléphones', 'persona-user-roles'),
-            'adress' => __('Adresse', 'persona-user-roles'),
+            'address' => __('Adresse', 'persona-user-roles'),
             'rgpd' => __('RGPD ?', 'persona-user-roles'),
         ]);
     }
@@ -75,7 +76,7 @@ class PersonaType extends AbstractType
         <?php
         }
 
-        if ($column_key == 'adress') {
+        if ($column_key == 'address') {
             $adress = get_post_meta($post_id, '_persona_address', true);
             ?>
             <span><?php echo esc_attr($adress); ?></span>

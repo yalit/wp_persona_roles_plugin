@@ -13,6 +13,7 @@ class Persona
         public string $phone = "",
         public string $mobile = "",
         public string $address = "",
+        public string $function = "",
         public bool $rgpd = false,
         public string $imagePath = "",
         public ?string $legacyId = null

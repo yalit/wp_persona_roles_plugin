@@ -23,6 +23,7 @@ class ImportToPersonaDataTransformer extends GenericDataTransformer
             sanitize_text_field(static::getProperty($data, 'telfixe', "")),
             sanitize_text_field(static::getProperty($data, 'tel', "")),
             sanitize_text_field(static::getProperty($data, 'adresse_postale', ""))." ".sanitize_text_field(static::getProperty($data, 'cpos', "")).' '.sanitize_text_field(static::getProperty($data, 'localite', "")),
+            sanitize_text_field(static::getProperty($data, 'fonction', "")),
             intval(sanitize_text_field(static::getProperty($data, 'actif', "0"))) === 1,
             "",
             sanitize_text_field(static::getProperty($data, 'id', "")),
