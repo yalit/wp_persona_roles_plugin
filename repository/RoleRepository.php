@@ -26,14 +26,7 @@ class RoleRepository extends AbstractRepository
             ]
         ];
 
-        $posts = (new WP_Query($args))->get_posts();
-
-        if (count($posts) !== 1) {
-            return null;
-        }
-
-        $post = $posts[0];
-        return RoleFactory::createFromPost($post);
+        return static::queryPost($args, RoleFactory::class);
     }
 
     /** @return array<Role> */
@@ -47,9 +40,23 @@ class RoleRepository extends AbstractRepository
             'meta_key' => RoleType::getFieldDBId('name')
         ];
 
-        $posts = (new WP_Query($args))->get_posts();
+        return static::queryPosts($args, RoleFactory::class);
+    }
 
-        return array_map(fn(WP_Post $post) => RoleFactory::createFromPost($post), $posts);
+    public static function findFromLegacyId(string $legacyId): ?Role
+    {
+        $args = [
+            'post_type' => RoleType::getPostType(),
+            'meta_query' => [
+                [
+                    'key' => RoleType::getFieldDBId(AffectationImporterPage::LEGACY_ID_FIELD_NAME),
+                    'value' => $legacyId,
+                    'compare' => '='
+                ]
+            ]
+        ];
+
+        return static::queryPost($args, RoleFactory::class);
     }
 
     public static function save(Role $role): void
@@ -72,7 +79,7 @@ class RoleRepository extends AbstractRepository
             update_post_meta($postId, RoleType::getFieldDBId('sequence'), $role->sequence);
         }
         if($role->legacyId && $role->legacyId !== "") {
-            update_post_meta($postId, RoleType::getFieldDBId(AffectationImporter::LEGACY_ID_FIELD_NAME), $role->legacyId);
+            update_post_meta($postId, RoleType::getFieldDBId(AffectationImporterPage::LEGACY_ID_FIELD_NAME), $role->legacyId);
         }
     }
 }

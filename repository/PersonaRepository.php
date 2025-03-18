@@ -20,21 +20,14 @@ class PersonaRepository extends AbstractRepository
             'post_type' => PersonaType::getPostType(),
             'meta_query' => [
                 [
-                    'key' => PersonaType::getFieldDBId(AffectationImporter::LEGACY_ID_FIELD_NAME),
+                    'key' => PersonaType::getFieldDBId(AffectationImporterPage::LEGACY_ID_FIELD_NAME),
                     'value' => $legacyId,
                     'compare' => '='
                 ]
             ]
         ];
 
-        $posts = (new WP_Query($args))->get_posts();
-
-        if (count($posts) !== 1) {
-            return null;
-        }
-
-        $post = $posts[0];
-        return PersonaFactory::createFromPost($post);
+        return static::queryPost($args, PersonaFactory::class);
     }
 
     public static function save(Persona $persona): void
@@ -72,7 +65,7 @@ class PersonaRepository extends AbstractRepository
             update_post_meta($postId, PersonaType::getFieldDBId('picture'), $persona->imagePath);
         }
         if($persona->legacyId && $persona->legacyId !== "") {
-            update_post_meta($postId, PersonaType::getFieldDBId(AffectationImporter::LEGACY_ID_FIELD_NAME), $persona->legacyId);
+            update_post_meta($postId, PersonaType::getFieldDBId(AffectationImporterPage::LEGACY_ID_FIELD_NAME), $persona->legacyId);
         }
     }
 }

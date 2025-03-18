@@ -43,25 +43,26 @@ class AffectationType extends AbstractType
     public function displayColumns($column_key, $post_id): void
     { 
         if ($column_key === 'role') {
-            $role = get_post_meta($post_id, static::getFieldDBId('role'), true);
+            $roleId = get_post_meta($post_id, static::getFieldDBId('role'), true);
+            $role = RoleRepository::find($roleId);
             ?>
-            <span><?php echo esc_attr($role); ?></span>
+            <span><?php echo esc_attr($role->name); ?></span>
             <?php
         }
         
         if ($column_key === 'group') {
             $groupID = get_post_meta($post_id, static::getFieldDBId('group'), true);
-            $groupe = get_post( $groupID);
+            $group = GroupRepository::find($groupID);
             ?>
-            <span><?php echo esc_attr($groupe->post_title); ?></span>
+            <span><?php echo esc_attr($group->name); ?></span>
             <?php
         }
 
         if ($column_key === 'parish') {
             $parishID = get_post_meta($post_id, static::getFieldDBId('parish'), true);
-            $parish = get_post( $parishID);
+            $parish = ParishRepository::find($parishID);
             ?>
-            <span><?php echo esc_attr($parish->post_title); ?></span>
+            <span><?php echo esc_attr($parish->name); ?></span>
             <?php
         }
     }

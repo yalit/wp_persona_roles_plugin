@@ -26,14 +26,7 @@ class GroupRepository extends AbstractRepository
             ]
         ];
 
-        $posts = (new WP_Query($args))->get_posts();
-
-        if (count($posts) !== 1) {
-            return null;
-        }
-
-        $post = $posts[0];
-        return GroupFactory::createFromPost($post);
+        return static::queryPost($args, GroupFactory::class);
     }
 
     /** @return array<Group> */
@@ -47,9 +40,23 @@ class GroupRepository extends AbstractRepository
             'meta_key' => GroupType::getFieldDBId('name')
         ];
 
-        $posts = (new WP_Query($args))->get_posts();
+        return static::queryPosts($args, GroupFactory::class);
+    }
 
-        return array_map(fn(WP_Post $post) => GroupFactory::createFromPost($post), $posts);
+    public static function findFromLegacyId(string $legacyId): ?Group
+    {
+        $args = [
+            'post_type' => GroupType::getPostType(),
+            'meta_query' => [
+                [
+                    'key' => GroupType::getFieldDBId(AffectationImporterPage::LEGACY_ID_FIELD_NAME),
+                    'value' => $legacyId,
+                    'compare' => '='
+                ]
+            ]
+        ];
+
+        return static::queryPost($args, GroupFactory::class);
     }
 
     public static function save(Group $group): void
@@ -72,7 +79,7 @@ class GroupRepository extends AbstractRepository
             update_post_meta($postId, GroupType::getFieldDBId('sequence'), $group->sequence);
         }
         if($group->legacyId && $group->legacyId !== "") {
-            update_post_meta($postId, GroupType::getFieldDBId(AffectationImporter::LEGACY_ID_FIELD_NAME), $group->legacyId);
+            update_post_meta($postId, GroupType::getFieldDBId(AffectationImporterPage::LEGACY_ID_FIELD_NAME), $group->legacyId);
         }
     }
 }

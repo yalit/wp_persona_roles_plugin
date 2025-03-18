@@ -3,12 +3,12 @@
 class Affectation
 {
     public function __construct(
-        public string $id,
-        public Persona $persona,
-        public Parish $parish,
-        public Group $group,
-        public Role $role,
-        public int $order
+        public ?string $id,
+        public ?Persona $persona,
+        public ?Parish $parish,
+        public ?Group $group,
+        public ?Role $role,
+        public int $order,
     ) {}
 
     public function isEqual(Affectation $a, ContentEnum $enum): bool

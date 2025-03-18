@@ -23,7 +23,7 @@
    add_action('init', [ AffectationType::class, 'init']);
    add_action('init', [ Shortcode::class, 'init']);
 
-   add_action('init', [ AffectationImporter::class, 'init']);
+   add_action('init', [ AffectationImporterPage::class, 'init']);
 
    add_action( 'rest_api_init', [PersonaRest::class, 'registerRoutes'] );
 

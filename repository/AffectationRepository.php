@@ -1,6 +1,6 @@
 <?php
 
-class AffectationRepository
+class AffectationRepository extends AbstractRepository
 {
     /** @return array<Affectation> */
     public static function findFiltered(
@@ -26,7 +26,7 @@ class AffectationRepository
         }
 
         if ($roleCode) {
-            static::addRoleMetaQuery($metaQueries, $roleCode);
+            static::addAffectationMetaQuery($metaQueries, $roleCode);
         }
 
         if (count($metaQueries) > 1) {
@@ -69,9 +69,9 @@ class AffectationRepository
         }
     }
 
-    private static function addRoleMetaQuery(&$metaqueries, $roleCode): void
+    private static function addAffectationMetaQuery(&$metaqueries, $roleCode): void
     {
-        $role = RoleRepository::findFromCode($roleCode);
+        $role = AffectationRepository::findFromCode($roleCode);
 
         if ($role) {
             $metaqueries[] = [
@@ -102,5 +102,29 @@ class AffectationRepository
         });
         
         return array_values($affectations);
+    }
+
+    public static function save(Affectation $affectation): void
+    {
+        $postId = "";
+        if (!$affectation->id) {
+            $postId = static::createPost(sprintf("%s-%s", $affectation->persona->name, $affectation->group ? $affectation->group->name : $affectation->role->name), AffectationType::getPostType());
+        }
+
+        if ($affectation->persona) {
+            update_post_meta($postId, AffectationType::getFieldDBId('persona'), $affectation->persona->id);
+        }
+        if ($affectation->role) {
+            update_post_meta($postId, AffectationType::getFieldDBId('role'), $affectation->role->id);
+        }
+        if ($affectation->group) {
+            update_post_meta($postId, AffectationType::getFieldDBId('group'), $affectation->group->id);
+        }
+        if ($affectation->parish) {
+            update_post_meta($postId, AffectationType::getFieldDBId('parish'), $affectation->parish->id);
+        }
+        if ($affectation->order) {
+            update_post_meta($postId, AffectationType::getFieldDBId('order'), $affectation->order);
+        }
     }
 }

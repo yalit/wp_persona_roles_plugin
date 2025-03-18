@@ -1,11 +1,12 @@
 <?php
 
+use services\AffectationImporter;
 use services\GroupImporter;
 use services\Parishimporter;
 use services\PersonaImporter;
-use services\Roleimporter;
+use services\RoleImporter;
 
-class AffectationImporter
+class AffectationImporterPage
 {
     public const LEGACY_ID_FIELD_NAME = 'legacyId';
 
@@ -124,6 +125,7 @@ class AffectationImporter
                 "roles" => RoleImporter::import($datas),
                 "groups" => GroupImporter::import($datas),
                 "parishes" => Parishimporter::import($datas),
+                'affectations' => AffectationImporter::import($datas),
             };
 
             $row_count++;

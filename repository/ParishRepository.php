@@ -27,15 +27,25 @@ class ParishRepository extends AbstractRepository
             ]
         ];
 
-        $posts = (new WP_Query($args))->get_posts();
-
-        if (count($posts) !== 1) {
-            return null;
-        }
-
-        $post = $posts[0];
-        return ParishFactory::createFromPost($post);
+        return static::queryPost($args, ParishFactory::class);
     }
+
+    public static function findFromLegacyId(string $legacyId): ?Parish
+    {
+        $args = [
+            'post_type' => ParishType::getPostType(),
+            'meta_query' => [
+                [
+                    'key' => ParishType::getFieldDBId(AffectationImporterPage::LEGACY_ID_FIELD_NAME),
+                    'value' => $legacyId,
+                    'compare' => '='
+                ]
+            ]
+        ];
+
+        return static::queryPost($args, ParishFactory::class);
+    }
+
 
     /** @return array<Parish> */
     public static function findAll(): array
@@ -48,9 +58,7 @@ class ParishRepository extends AbstractRepository
             'meta_key' => ParishType::getFieldDBId('name')
         ];
 
-        $posts = (new WP_Query($args))->get_posts();
-
-        return array_map(fn(WP_Post $post) => ParishFactory::createFromPost($post), $posts);
+        return static::queryPosts($args, ParishFactory::class);
     }
 
     public static function save(Parish $parish): void
@@ -70,7 +78,7 @@ class ParishRepository extends AbstractRepository
             update_post_meta($postId, ParishType::getFieldDBId('sequence'), $parish->sequence);
         }
         if($parish->legacyId && $parish->legacyId !== "") {
-            update_post_meta($postId, ParishType::getFieldDBId(AffectationImporter::LEGACY_ID_FIELD_NAME), $parish->legacyId);
+            update_post_meta($postId, ParishType::getFieldDBId(AffectationImporterPage::LEGACY_ID_FIELD_NAME), $parish->legacyId);
         }
     }
 }

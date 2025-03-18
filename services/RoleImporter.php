@@ -5,7 +5,7 @@ namespace services;
 use dataTransformer\ImportToRoleDataTransformer;
 use RoleRepository;
 
-class Roleimporter
+class RoleImporter
 {
     public static function import(array $data): void
     {
