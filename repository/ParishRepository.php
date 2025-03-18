@@ -1,6 +1,6 @@
 <?php
 
-class ParishRepository
+class ParishRepository extends AbstractRepository
 {
 
     public static function find(string $parishID): ?Parish
@@ -51,5 +51,26 @@ class ParishRepository
         $posts = (new WP_Query($args))->get_posts();
 
         return array_map(fn(WP_Post $post) => ParishFactory::createFromPost($post), $posts);
+    }
+
+    public static function save(Parish $parish): void
+    {
+        $postId = "";
+        if (!$parish->id) {
+            $postId = static::createPost(sprintf("%s", $parish->name), ParishType::getPostType());
+        }
+
+        if ($parish->name) {
+            update_post_meta($postId, ParishType::getFieldDBId('name'), $parish->name);
+        }
+        if ($parish->code) {
+            update_post_meta($postId, ParishType::getFieldDBId('code'), $parish->code);
+        }
+        if ($parish->sequence && $parish->sequence !== "") {
+            update_post_meta($postId, ParishType::getFieldDBId('sequence'), $parish->sequence);
+        }
+        if($parish->legacyId && $parish->legacyId !== "") {
+            update_post_meta($postId, ParishType::getFieldDBId(AffectationImporter::LEGACY_ID_FIELD_NAME), $parish->legacyId);
+        }
     }
 }

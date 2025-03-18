@@ -7,6 +7,7 @@ require_folder(__DIR__.'/shortcode');
 require_folder(__DIR__.'/svg');
 require_folder(__DIR__.'/pages');
 require_folder(__DIR__.'/rest');
+require_folder(__DIR__.'/services');
 
 
 function require_folder(string $folder): void

@@ -3,8 +3,8 @@
 class Persona
 {
     public function __construct(
-        public string $id,
-        public string $civilite,
+        public ?string $id,
+        public string $civilite = "",
         public string $name,
         public string $surname,
         public string $email,
@@ -12,6 +12,7 @@ class Persona
         public string $mobile = "",
         public string $address = "",
         public bool $rgpd = false,
-        public string $imagePath = ""
+        public string $imagePath = "",
+        public ?string $legacyId = null
     ){}
 }

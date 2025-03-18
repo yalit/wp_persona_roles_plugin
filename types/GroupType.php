@@ -19,6 +19,7 @@ class GroupType extends AbstractType
             'name' => ['Nom', 'text'],
             'code' => ['Code', 'text'],
             'active' => ['Actif ?', 'boolean'],
+            'sequence' => ['Sequence', 'number'],
         ];
     }
 
@@ -31,6 +32,7 @@ class GroupType extends AbstractType
         unset($columns['date']);
         return array_merge($columns, [
             'active' => __('Actif ?', 'persona-user-roles'),
+            'sequence' => __('Sequence', 'persona-user-roles'),
             'code' => __('CODE', 'persona-user-roles'),
         ]);
     }
@@ -41,6 +43,13 @@ class GroupType extends AbstractType
             ?>
             <span><?php echo esc_attr($code); ?></span>
         <?php
+        }
+
+        if ($column_key == 'sequence') {
+            $code = get_post_meta($post_id, static::getFieldDBId('sequence'), true);
+            ?>
+            <span><?php echo esc_attr($code); ?></span>
+            <?php
         }
 
         if ($column_key == 'active') {

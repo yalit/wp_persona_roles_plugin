@@ -7,7 +7,8 @@ class ParishFactory
         return new Parish(
             $post->ID, 
             get_post_meta( $post->ID, ParishType::getFieldDBId('name'), true),
-            get_post_meta( $post->ID, ParishType::getFieldDBId('code'), true)
+            get_post_meta( $post->ID, ParishType::getFieldDBId('code'), true),
+            get_post_meta( $post->ID, ParishType::getFieldDBId('sequence'), true),
         );
     }
 }

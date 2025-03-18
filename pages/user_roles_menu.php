@@ -16,7 +16,7 @@ class PersonaMenu
 
     public function addMenu()
     {
-        if (!is_admin()) {
+    if (!is_admin()) {
             return;
         }
         

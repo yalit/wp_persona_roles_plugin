@@ -17,7 +17,8 @@ class RoleType extends AbstractType
         return [
             'name' => ['Nom', 'text'],
             'code' => ['Code', 'text'],
-            'description' => ['Description', 'textarea']
+            'description' => ['Description', 'textarea'],
+            'sequence' => ['Sequence', 'number'],
         ];
     }
 
@@ -30,6 +31,7 @@ class RoleType extends AbstractType
     { 
         unset($columns['date']);
         $columns['code'] = __('Code', 'persona_user_roles');
+        $columns['sequence'] = __('Sequence', 'persona_user_roles');
         return $columns;
     }
 
@@ -37,6 +39,13 @@ class RoleType extends AbstractType
     { 
         if ($column_key === 'code') {
             $value = get_post_meta( $post_id, static::getFieldDBId('code'), true );
+            ?>
+            <span><?php echo esc_attr($value); ?></span>
+            <?php
+        }
+
+        if ($column_key === 'sequence') {
+            $value = get_post_meta( $post_id, static::getFieldDBId('sequence'), true );
             ?>
             <span><?php echo esc_attr($value); ?></span>
             <?php

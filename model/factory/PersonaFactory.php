@@ -15,7 +15,6 @@ class PersonaFactory
             get_post_meta( $post->ID, PersonaType::getFieldDBId('address'), true),
             get_post_meta( $post->ID, PersonaType::getFieldDBId('rgpd'), true),
             get_post_meta( $post->ID, PersonaType::getFieldDBId('picture'), true),
-
         );
     }
 }

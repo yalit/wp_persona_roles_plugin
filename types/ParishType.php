@@ -16,7 +16,8 @@ class ParishType extends AbstractType
     { 
         return [
             'name' => ['Nom', 'text'],
-            'code' => ['Code', 'text']
+            'code' => ['Code', 'text'],
+            'sequence' => ['Sequence', 'number'],
         ];
     }
 
@@ -29,6 +30,7 @@ class ParishType extends AbstractType
     { 
         unset($columns['date']);
         $columns['code'] = __('Code', 'persona_user_roles');
+        $columns['sequence'] = __('Sequence', 'persona_user_roles');
         return $columns;
     }
 
@@ -36,6 +38,13 @@ class ParishType extends AbstractType
     { 
         if ($column_key === 'code') {
             $value = get_post_meta( $post_id, static::getFieldDBId('code'), true );
+            ?>
+            <span><?php echo esc_attr($value); ?></span>
+            <?php
+        }
+
+        if ($column_key === 'sequence') {
+            $value = get_post_meta( $post_id, static::getFieldDBId('sequence'), true );
             ?>
             <span><?php echo esc_attr($value); ?></span>
             <?php

@@ -215,13 +215,13 @@ abstract class AbstractType
             $postKey = static::getFieldId($key);
             if (array_key_exists($postKey, $_POST)) {
                 if ($details[1] === 'email') {
-                    update_post_meta($post_id, sprintf('_%s', $postKey), sanitize_email($_POST[$postKey]));
+                    update_post_meta($post_id, static::getFieldDBId($key), sanitize_email($_POST[$postKey]));
                 } else if ($details[1] === 'boolean') {
-                    update_post_meta($post_id, sprintf('_%s', $postKey), $_POST[$postKey] === 'on');
+                    update_post_meta($post_id, static::getFieldDBId($key), $_POST[$postKey] === 'on');
                 } else if ($details[1] === 'textarea') {
-                    update_post_meta($post_id, sprintf('_%s', $postKey), sanitize_textarea_field($_POST[$postKey]));
+                    update_post_meta($post_id, static::getFieldDBId($key), sanitize_textarea_field($_POST[$postKey]));
                 } else { // Default saver
-                    update_post_meta($post_id, sprintf('_%s', $postKey), sanitize_text_field($_POST[$postKey]));
+                    update_post_meta($post_id, static::getFieldDBId($key), sanitize_text_field($_POST[$postKey]));
                 }
             } else if (array_key_exists($postKey, $_FILES)) {
                 if ($details[1] === 'file') { 
@@ -235,9 +235,9 @@ abstract class AbstractType
             }
             else {
                 if ($details[1] === 'boolean') {
-                    $value = get_post_meta($post_id, sprintf('_%s', $postKey), true);
+                    $value = get_post_meta($post_id, static::getFieldDBId($key), true);
                     if (!empty($value)) {
-                        delete_post_meta($post_id, sprintf('_%s', $postKey));
+                        delete_post_meta($post_id, static::getFieldDBId($key));
                     }
                 }
             }

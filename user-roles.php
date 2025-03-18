@@ -1,7 +1,6 @@
 <?php
    /**
    * Plugin Name: User Roles
-   * Plugin URI: https://example.com/my-custom-post-types
    * Description: Handles user roles and presence in groups
    * Version: 0.1
    * Author: Yannick Alsberge
@@ -24,6 +23,8 @@
    add_action('init', [ AffectationType::class, 'init']);
    add_action('init', [ Shortcode::class, 'init']);
 
+   add_action('init', [ AffectationImporter::class, 'init']);
+
    add_action( 'rest_api_init', [PersonaRest::class, 'registerRoutes'] );
 
    add_action('admin_enqueue_scripts', function() {
@@ -40,7 +41,7 @@
             'persona_script_shortcode_generator_admin', // Identifiant unique pour le script
             plugin_dir_url(__FILE__) .'/scripts/shortcode-generator.js', // Chemin vers le fichier JavaScript
             [], // Dépendances (par exemple, jQuery)
-            filemtime(plugin_dir_url(__FILE__) .'/scripts/shortcode-generator.js'), // Version du script (utilise la date de modification du fichier)
+            1, // Version du script (utilise la date de modification du fichier)
             true // Charger le script dans le pied de page
         );
     
