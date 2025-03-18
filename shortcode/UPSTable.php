@@ -40,10 +40,7 @@ class UPSTable
         if ($displayData->isDisplayed(ContentEnum::Role) || $displayData->isDisplayed(ContentEnum::Name)) {
             $r .= AffectationDisplay::getName($affectation, $displayData);
             $r .= AffectationDisplay::getRole($affectation, $displayData);
-
-            //TODO : add role description
-            //$r .= sprintf("<div>%s</div>", $affectation->role->description);
-        }      
+        }
         $r .= '</div>';
 
         // adresse
