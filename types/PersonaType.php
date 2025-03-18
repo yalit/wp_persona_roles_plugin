@@ -1,5 +1,7 @@
 <?php
 
+namespace types;
+
 class PersonaType extends AbstractType
 {
 

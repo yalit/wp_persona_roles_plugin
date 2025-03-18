@@ -1,5 +1,14 @@
 <?php
 
+namespace model\factory;
+
+use model\Affectation;
+use repository\GroupRepository;
+use repository\ParishRepository;
+use repository\PersonaRepository;
+use repository\RoleRepository;
+use types\AffectationType;
+
 class AffectationFactory
 {
     public static function createFromPost(WP_Post $post): Affectation

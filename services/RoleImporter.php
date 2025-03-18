@@ -2,8 +2,8 @@
 
 namespace services;
 
-use dataTransformer\ImportToRoleDataTransformer;
-use RoleRepository;
+use model\dataTransformer\ImportToRoleDataTransformer;
+use repository\RoleRepository;
 
 class RoleImporter
 {

@@ -2,8 +2,8 @@
 
 namespace services;
 
-use dataTransformer\ImportToPersonaDataTransformer;
-use PersonaRepository;
+use model\dataTransformer\ImportToPersonaDataTransformer;
+use repository\PersonaRepository;
 
 class PersonaImporter
 {

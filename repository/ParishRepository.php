@@ -1,5 +1,12 @@
 <?php
 
+namespace repository;
+
+use model\factory\ParishFactory;
+use model\Parish;
+use pages\AffectationImporterPage;
+use types\ParishType;
+
 class ParishRepository extends AbstractRepository
 {
 

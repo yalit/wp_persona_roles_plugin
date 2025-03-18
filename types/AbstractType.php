@@ -1,5 +1,7 @@
 <?php
 
+namespace types;
+
 abstract class AbstractType
 {
     public static function init(): void
@@ -29,7 +31,7 @@ abstract class AbstractType
 
     public static function getFieldId($fieldKey)
     {
-        return sprintf("%s_%s",static::getPostType(), $fieldKey);
+        return sprintf("%s_%s", static::getPostType(), $fieldKey);
     }
 
     public static function getFieldDBId($fieldKey)
@@ -253,16 +255,4 @@ abstract class AbstractType
 
         return $data;
     }
-}
-
-function dd($element) 
-{
-    if (is_array($element)) {
-        ?>
-        <pre><?php print_r($element); ?></pre>
-        <?php
-    } else {
-        var_dump($element);
-    }
-    die;
 }

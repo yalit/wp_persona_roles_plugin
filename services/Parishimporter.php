@@ -2,8 +2,8 @@
 
 namespace services;
 
-use dataTransformer\ImportToParishDataTransformer;
-use ParishRepository;
+use model\dataTransformer\ImportToParishDataTransformer;
+use repository\ParishRepository;
 
 class Parishimporter
 {

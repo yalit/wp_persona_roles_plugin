@@ -1,5 +1,11 @@
 <?php
 
+namespace types;
+
+use repository\GroupRepository;
+use repository\ParishRepository;
+use repository\RoleRepository;
+
 class AffectationType extends AbstractType
 {
     public static function getPostType(): string 

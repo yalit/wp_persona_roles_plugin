@@ -1,5 +1,11 @@
 <?php
 
+namespace shortcode;
+
+use model\Affectation;
+use model\DisplayData;
+use shortcode\Enum\ContentEnum;
+
 class AffectationDisplay
 {
 

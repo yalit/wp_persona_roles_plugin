@@ -1,8 +1,9 @@
 <?php
 
-namespace dataTransformer;
+namespace model\dataTransformer;
 
-use Parish;
+
+use model\Parish;
 
 class ImportToParishDataTransformer extends GenericDataTransformer
 {

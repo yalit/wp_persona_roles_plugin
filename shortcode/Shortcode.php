@@ -1,5 +1,11 @@
 <?php
 
+namespace shortcode;
+
+use model\DisplayData;
+use repository\AffectationRepository;
+use shortcode\Enum\FormatEnum;
+
 class Shortcode
 {
     public const NAME = 'ups-select';

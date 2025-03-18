@@ -1,5 +1,7 @@
 <?php
 
+namespace shortcode\Enum;
+
 enum ContentEnum: string
 {
     case Parish = 'P';

@@ -1,5 +1,7 @@
 <?php
 
+namespace repository;
+
 class AbstractRepository
 {
     protected static function createPost(string $postTitle, string $postType): int

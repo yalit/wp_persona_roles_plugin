@@ -1,5 +1,7 @@
 <?php
 
+namespace model;
+
 class Role
 {
     public function __construct(

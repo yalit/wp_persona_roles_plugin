@@ -1,5 +1,13 @@
 <?php
 
+namespace pages;
+
+use types\AffectationType;
+use types\GroupType;
+use types\ParishType;
+use types\PersonaType;
+use types\RoleType;
+
 class PersonaMenu
 {
     public const MENU_NAME = 'persona_menu';
@@ -111,7 +119,7 @@ class PersonaMenu
         );
     }
 
-    public function displayMenu()
+    public function displayMenu(): void
     {
         AffectationHome::display();
     }

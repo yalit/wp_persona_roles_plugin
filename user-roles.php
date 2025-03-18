@@ -9,7 +9,17 @@
    * Text Domain: user-roles
    */
 
-   if ( ! defined( 'ABSPATH' ) ) {
+use pages\AffectationImporterPage;
+use pages\PersonaMenu;
+use rest\PersonaRest;
+use shortcode\Shortcode;
+use types\AffectationType;
+use types\GroupType;
+use types\ParishType;
+use types\PersonaType;
+use types\RoleType;
+
+if ( ! defined( 'ABSPATH' ) ) {
       exit; // Exit if accessed directly
    }
    

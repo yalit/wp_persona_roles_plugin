@@ -1,5 +1,7 @@
 <?php
 
+namespace model;
+
 class Parish
 {
     public function __construct(

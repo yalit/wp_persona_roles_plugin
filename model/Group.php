@@ -1,5 +1,7 @@
 <?php
 
+namespace model;
+
 class Group
 {
     public function __construct(

@@ -1,5 +1,7 @@
 <?php
 
+namespace pages;
+
 use services\AffectationImporter;
 use services\GroupImporter;
 use services\Parishimporter;

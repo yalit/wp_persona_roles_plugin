@@ -1,5 +1,10 @@
 <?php
 
+namespace model\factory;
+
+use model\Group;
+use types\GroupType;
+
 class GroupFactory
 {
     public static function createFromPost(WP_Post $post): Group

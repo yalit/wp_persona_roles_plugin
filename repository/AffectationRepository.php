@@ -1,5 +1,12 @@
 <?php
 
+namespace repository;
+
+use model\Affectation;
+use model\factory\AffectationFactory;
+use shortcode\Enum\ContentEnum;
+use types\AffectationType;
+
 class AffectationRepository extends AbstractRepository
 {
     /** @return array<Affectation> */
@@ -88,7 +95,7 @@ class AffectationRepository extends AbstractRepository
      */
     private static function order(array $affectations, $orderBy): array
     {
-        /* @var array<ContentEnmu> $order */
+        /* @var array<ContentEnum> $order */
         $order = array_map(fn($s) => ContentEnum::from($s), str_split($orderBy));
         uasort($affectations, function(Affectation $a, Affectation $b) use($order) {
             foreach($order as $enum) {

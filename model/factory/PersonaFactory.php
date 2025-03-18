@@ -1,5 +1,10 @@
 <?php
 
+namespace model\factory;
+
+use model\Persona;
+use types\PersonaType;
+
 class PersonaFactory
 {
     public static function createFromPost(WP_Post $post): Persona

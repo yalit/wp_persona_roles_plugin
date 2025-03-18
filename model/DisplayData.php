@@ -1,5 +1,9 @@
 <?php
 
+namespace model;
+
+use shortcode\Enum\ContentEnum;
+
 class DisplayData
 {
     public function __construct(

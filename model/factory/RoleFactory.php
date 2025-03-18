@@ -1,5 +1,10 @@
 <?php
 
+namespace model\factory;
+
+use model\Role;
+use types\RoleType;
+
 class RoleFactory
 {
     public static function createFromPost(WP_Post $post): Role

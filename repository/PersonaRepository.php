@@ -1,5 +1,12 @@
 <?php
 
+namespace repository;
+
+use model\factory\PersonaFactory;
+use model\Persona;
+use pages\AffectationImporterPage;
+use types\PersonaType;
+
 class PersonaRepository extends AbstractRepository
 {
 

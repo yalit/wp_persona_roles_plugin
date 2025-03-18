@@ -1,5 +1,7 @@
 <?php
 
+namespace model;
+
 class Persona
 {
     public function __construct(

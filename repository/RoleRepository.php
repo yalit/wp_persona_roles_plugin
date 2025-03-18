@@ -1,5 +1,12 @@
 <?php
 
+namespace repository;
+
+use model\factory\RoleFactory;
+use model\Role;
+use pages\AffectationImporterPage;
+use types\RoleType;
+
 class RoleRepository extends AbstractRepository
 {
     public static function find(string $RoleID): ?Role

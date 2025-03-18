@@ -1,9 +1,9 @@
 <?php
 
-namespace dataTransformer;
+namespace model\dataTransformer;
 
 
-use Group;
+use model\Group;
 
 class ImportToGroupDataTransformer extends GenericDataTransformer
 {

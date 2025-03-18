@@ -1,5 +1,10 @@
 <?php
 
+namespace model\factory;
+
+use model\Parish;
+use types\ParishType;
+
 class ParishFactory
 {
     public static function createFromPost(WP_Post $post): Parish

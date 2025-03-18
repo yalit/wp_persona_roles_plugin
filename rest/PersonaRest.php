@@ -1,5 +1,7 @@
 <?php
 
+namespace rest;
+
 class PersonaRest
 {
     public const BASE_URL = 'persona-roles';

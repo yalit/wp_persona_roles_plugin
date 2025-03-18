@@ -1,5 +1,7 @@
 <?php
 
+namespace types;
+
 class ParishType extends AbstractType
 {
     public static function getPostType(): string 

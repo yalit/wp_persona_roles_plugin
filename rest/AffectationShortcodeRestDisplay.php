@@ -1,5 +1,12 @@
 <?php
 
+namespace rest;
+
+use model\DisplayData;
+use repository\AffectationRepository;
+use shortcode\Enum\FormatEnum;
+use shortcode\UPSTable;
+use shortcode\UPSVisitCard;
 
 class AffectationShortcodeRestDisplay
 {

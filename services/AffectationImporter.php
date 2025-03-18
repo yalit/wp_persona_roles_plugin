@@ -2,8 +2,8 @@
 
 namespace services;
 
-use dataTransformer\ImportToAffectationDataTransformer;
-use AffectationRepository;
+use model\dataTransformer\ImportToAffectationDataTransformer;
+use repository\AffectationRepository;
 
 class AffectationImporter
 {

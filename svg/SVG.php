@@ -1,5 +1,7 @@
 <?php
 
+namespace svg;
+
 class SVG
 {
     public static function envelop()

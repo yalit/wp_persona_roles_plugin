@@ -1,8 +1,8 @@
 <?php
 
-namespace dataTransformer;
+namespace model\dataTransformer;
 
-use Role;
+use model\Role;
 
 class ImportToRoleDataTransformer extends GenericDataTransformer
 {

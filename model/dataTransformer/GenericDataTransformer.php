@@ -1,6 +1,6 @@
 <?php
 
-namespace dataTransformer;
+namespace model\dataTransformer;
 
 class GenericDataTransformer
 {

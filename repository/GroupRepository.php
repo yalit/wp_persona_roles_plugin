@@ -1,5 +1,12 @@
 <?php
 
+namespace repository;
+
+use model\factory\GroupFactory;
+use model\Group;
+use pages\AffectationImporterPage;
+use types\GroupType;
+
 class GroupRepository extends AbstractRepository
 {
     public static function find(string $groupID): ?Group

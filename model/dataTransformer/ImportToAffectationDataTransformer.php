@@ -1,12 +1,12 @@
 <?php
 
-namespace dataTransformer;
+namespace model\dataTransformer;
 
-use Affectation;
-use GroupRepository;
-use ParishRepository;
-use PersonaRepository;
-use RoleRepository;
+use model\Affectation;
+use repository\GroupRepository;
+use repository\ParishRepository;
+use repository\PersonaRepository;
+use repository\RoleRepository;
 
 class ImportToAffectationDataTransformer extends GenericDataTransformer
 {

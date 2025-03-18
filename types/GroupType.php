@@ -1,5 +1,7 @@
 <?php
 
+namespace types;
+
 class GroupType extends AbstractType
 {
 

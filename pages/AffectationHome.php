@@ -1,5 +1,18 @@
 <?php
 
+namespace pages;
+
+
+use repository\GroupRepository;
+use repository\ParishRepository;
+use repository\RoleRepository;
+use shortcode\Enum\ContentEnum;
+use types\AffectationType;
+use types\GroupType;
+use types\ParishType;
+use types\PersonaType;
+use types\RoleType;
+
 class AffectationHome
 {
     public static function display(): void
@@ -13,7 +26,7 @@ class AffectationHome
                     <div class="postbox">
                         <div class="postbox-header"><h2>Description du plugin</h2></div>
                         <div class="inside">
-                            <?php echo static::description(); ?>
+                            <?php static::description(); ?>
                         </div>
                     </div>
                 </div>
@@ -22,7 +35,7 @@ class AffectationHome
                     <div class="postbox">
                         <div class="postbox-header"><h2>Génération de shortcode</h2></div>
                         <div class="inside">
-                        <?php echo static::generator(); ?>
+                        <?php static::generator(); ?>
                         </div>
                     </div>
                 </div>
@@ -31,7 +44,7 @@ class AffectationHome
         <?php
     }
 
-    private static function description()
+    private static function description(): void
     {
         ?>
         <div>Ce plugin permet de gérer les rôles des différents intervenants dans les différentes paroisses de l'UP.</div>
@@ -48,7 +61,7 @@ class AffectationHome
         <?php
     }
 
-    private static function generator()
+    private static function generator(): void
     {
 
         ?>

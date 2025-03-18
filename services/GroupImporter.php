@@ -2,8 +2,8 @@
 
 namespace services;
 
-use dataTransformer\ImportToGroupDataTransformer;
-use GroupRepository;
+use model\dataTransformer\ImportToGroupDataTransformer;
+use repository\GroupRepository;
 
 class GroupImporter
 {

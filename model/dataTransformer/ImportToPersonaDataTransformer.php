@@ -1,8 +1,8 @@
 <?php
 
-namespace dataTransformer;
+namespace model\dataTransformer;
 
-use Persona;
+use model\Persona;
 
 class ImportToPersonaDataTransformer extends GenericDataTransformer
 {
