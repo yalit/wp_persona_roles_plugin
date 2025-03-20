@@ -8,6 +8,9 @@ use shortcode\Enum\FormatEnum;
 use shortcode\UPSTable;
 use shortcode\UPSVisitCard;
 
+use WP_REST_Request;
+use WP_REST_Response;
+
 class AffectationShortcodeRestDisplay
 {
     public static function provideShortcodeDisplay(WP_REST_Request $request)

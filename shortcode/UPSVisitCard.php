@@ -29,20 +29,20 @@ class UPSVisitCard
         $r = '<div class="persona_data_row">';
         
         // Parish
-            $r .= "<div class=\"persona_data_col col_parish\">";
+            $r .= "<div class=\"persona_data_col col_parish ".AffectationDisplay::filledClass($displayData, ContentEnum::Parish)."\">";
         if ($displayData->isDisplayed(ContentEnum::Parish)) {
             $r .= AffectationDisplay::getParish($affectation, $displayData);
         }
         $r .= '</div>';
 
         // Image
-        $r .= "<div class=\"persona_data_col col_image\">";
+        $r .= "<div class=\"persona_data_col col_image ".AffectationDisplay::filledClass($displayData, ContentEnum::Image)."\">";
         if ($displayData->isDisplayed(ContentEnum::Image)) {
             $r .= AffectationDisplay::getImage($affectation, $displayData);
         }
         $r .= '</div>';
 
-        $r .= "<div class=\"persona_data_col col_data\">";
+        $r .= "<div class=\"persona_data_col col_data filled\">";
         // Role
         if ($displayData->isDisplayed(ContentEnum::Role) || $displayData->isDisplayed(ContentEnum::Name)) {
             $r .= AffectationDisplay::getName($affectation, $displayData);

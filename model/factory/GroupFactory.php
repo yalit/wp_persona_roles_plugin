@@ -5,6 +5,8 @@ namespace model\factory;
 use model\Group;
 use types\GroupType;
 
+use WP_Post;
+
 class GroupFactory
 {
     public static function createFromPost(WP_Post $post): Group

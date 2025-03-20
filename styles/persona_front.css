@@ -25,13 +25,17 @@ a {
 .underlined {text-decoration: underline;}
 .italic {font-style: italic;}
 
+.textarea_preserve {white-space: pre-line;}
+
 .persona_data {
+    position: relative;
     border-spacing: 5px;
     display : grid;
-    gap: 5px;
 
     &.table {
-        grid-template-columns: repeat(5,  minmax(min-content, auto));
+        --nb-columns: 6;
+        max-width: 100%;
+        grid-template-columns: repeat(var(--nb-columns),  minmax(0, max-content));
         .col_image {
             max-width: 80px;
         }
@@ -48,21 +52,18 @@ a {
         display: contents;
         font-size: 0.9rem;
         border-bottom: 1px solid #818181;
+        align-items: center;
 
         .persona_data_col {
-            padding-top: 10px;
-            padding-bottom: 5px;
+            padding: 10px 0;
 
-
-            &:first-child {
-                padding-left: 5px;
-            }
-            &:last-child {
-                padding-right: 5px;
+            &.filled {
+                padding: 10px;
             }
 
             &.col_image {
                 img {
+                    padding-top: 5px;
                     aspect-ratio: auto;
                     width: 100%;
                 }

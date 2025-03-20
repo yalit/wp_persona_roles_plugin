@@ -2,6 +2,9 @@
 
 namespace repository;
 
+use WP_Query;
+use WP_Post;
+
 class AbstractRepository
 {
     protected static function createPost(string $postTitle, string $postType): int
@@ -31,6 +34,6 @@ class AbstractRepository
     {
         $posts = (new WP_Query($args))->get_posts();
 
-        return array_map(fn(WP_Post $post) => $factoryClass::createFromPost($post), $posts);
+        return array_map(fn($post) => $factoryClass::createFromPost($post), $posts);
     }
 }

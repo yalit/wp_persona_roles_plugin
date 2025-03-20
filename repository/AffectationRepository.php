@@ -7,6 +7,9 @@ use model\factory\AffectationFactory;
 use shortcode\Enum\ContentEnum;
 use types\AffectationType;
 
+use WP_Post;
+use WP_Query;
+
 class AffectationRepository extends AbstractRepository
 {
     /** @return array<Affectation> */
@@ -22,8 +25,6 @@ class AffectationRepository extends AbstractRepository
             'posts_per_page' => -1,
         ];
 
-        // handles the meta_fields selection
-        $metaQueries = [];
         if ($parishCode) {
             static::addParishMetaQuery($metaQueries, $parishCode);
         }
@@ -33,7 +34,7 @@ class AffectationRepository extends AbstractRepository
         }
 
         if ($roleCode) {
-            static::addAffectationMetaQuery($metaQueries, $roleCode);
+            static::addRoleMetaQuery($metaQueries, $roleCode);
         }
 
         if (count($metaQueries) > 1) {
@@ -46,8 +47,36 @@ class AffectationRepository extends AbstractRepository
 
         $posts = (new WP_Query($args))->get_posts();
         $affectations = array_map(fn(WP_Post $post) => AffectationFactory::createFromPost($post), $posts);
-        
+        $affectations = static::unique($affectations, $parishCode, $groupCode, $roleCode);
+        $affectations = static::canDisplay($affectations);
+
         return static::order($affectations, $orderBy);
+    }
+
+    /**
+     * @param array<Affectation> $affectations
+     * @return array<Affectation>
+     */
+    private static function canDisplay(array $affectations): array
+    {
+        return array_filter($affectations, fn(Affectation $affectation) => $affectation->persona->rgpd);
+    }
+
+    /**
+     * @param array<Affectation> $affectations
+     * @return array<Affectation>
+     */
+    private static function unique(array $affectations, ?string $parishCode, ?string $groupCode, ?string $roleCode): array
+    {
+        $identifiers = array_unique(array_map(function(Affectation $affectation) use ($parishCode, $groupCode, $roleCode) {
+            $id = $affectation->persona->id;
+            if ($parishCode) {$id.=$affectation->parish->id;}
+            if ($groupCode) {$id.=$affectation->group->id;}
+            if ($roleCode) {$id.=$affectation->role->id;}
+            return $id;
+        }, $affectations));
+
+        return array_values(array_map(fn($key) => $affectations[$key], array_keys($identifiers)));
     }
 
     private static function addParishMetaQuery(&$metaqueries, $parishCode): void
@@ -76,9 +105,9 @@ class AffectationRepository extends AbstractRepository
         }
     }
 
-    private static function addAffectationMetaQuery(&$metaqueries, $roleCode): void
+    private static function addRoleMetaQuery(&$metaqueries, $roleCode): void
     {
-        $role = AffectationRepository::findFromCode($roleCode);
+        $role = RoleRepository::findFromCode($roleCode);
 
         if ($role) {
             $metaqueries[] = [
@@ -98,14 +127,17 @@ class AffectationRepository extends AbstractRepository
         /* @var array<ContentEnum> $order */
         $order = array_map(fn($s) => ContentEnum::from($s), str_split($orderBy));
         uasort($affectations, function(Affectation $a, Affectation $b) use($order) {
-            foreach($order as $enum) {
-                if ($a->isEqual($b, $enum)) {
-                    continue;
+            if ($a->isEqual($b, ContentEnum::Order)) {
+                foreach($order as $enum) {
+                    if ($a->isEqual($b, $enum)) {
+                        continue;
+                    }
+                    return $a->isLower($b, $enum) ? -1 : 1;
                 }
-                return $a->isLower($b, $enum) ? -1 : 1; 
+
+                return $a->isEqual($b, ContentEnum::Name) ? 0 : ($a->isLower($b, ContentEnum::Name) ? -1 : 1);
             }
-            
-            return $a->isEqual($b, ContentEnum::Order) ? 0 : ($a->isLower($b, ContentEnum::Order) ? -1 : 1);
+            return $a->isLower($b, ContentEnum::Order) ? -1 : 1;
         });
         
         return array_values($affectations);

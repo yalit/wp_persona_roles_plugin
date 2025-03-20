@@ -5,6 +5,8 @@ namespace model\factory;
 use model\Role;
 use types\RoleType;
 
+use WP_Post;
+
 class RoleFactory
 {
     public static function createFromPost(WP_Post $post): Role

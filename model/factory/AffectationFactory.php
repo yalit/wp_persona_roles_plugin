@@ -9,6 +9,8 @@ use repository\PersonaRepository;
 use repository\RoleRepository;
 use types\AffectationType;
 
+use WP_Post;
+
 class AffectationFactory
 {
     public static function createFromPost(WP_Post $post): Affectation

@@ -68,6 +68,9 @@ class PersonaRepository extends AbstractRepository
         if($persona->rgpd && $persona->rgpd !== "") {
             update_post_meta($postId, PersonaType::getFieldDBId('rgpd'), $persona->rgpd);
         }
+        if($persona->function && $persona->function !== "") {
+            update_post_meta($postId, PersonaType::getFieldDBId('function'), $persona->function);
+        }
         if($persona->imagePath && $persona->imagePath !== "") {
             update_post_meta($postId, PersonaType::getFieldDBId('picture'), $persona->imagePath);
         }

@@ -5,6 +5,8 @@ namespace model\factory;
 use model\Parish;
 use types\ParishType;
 
+use WP_Post;
+
 class ParishFactory
 {
     public static function createFromPost(WP_Post $post): Parish

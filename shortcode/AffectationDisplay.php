@@ -5,6 +5,7 @@ namespace shortcode;
 use model\Affectation;
 use model\DisplayData;
 use shortcode\Enum\ContentEnum;
+use svg\SVG;
 
 class AffectationDisplay
 {
@@ -31,6 +32,19 @@ class AffectationDisplay
         );
     }
 
+    public static function getCivilite(Affectation $affectation, DisplayData $display): string
+    {
+        if (!$affectation->persona->rgpd) {
+            return '';
+        }
+
+        return sprintf(
+            "<div class=\"persona_civilite %s\">%s</div>",
+            static::getClassInfo(ContentEnum::Civility, $display),
+            $affectation->persona->civilite,
+        );
+    }
+
     public static function getName(Affectation $affectation, DisplayData $display): string
     {
         if (!$affectation->persona->rgpd) {
@@ -42,6 +56,19 @@ class AffectationDisplay
             static::getClassInfo(ContentEnum::Name, $display), 
             $affectation->persona->name, 
             $affectation->persona->surname
+        );
+    }
+
+    public static function getFunction(Affectation $affectation, DisplayData $display): string
+    {
+        if (!$affectation->persona->rgpd) {
+            return '';
+        }
+
+        return sprintf(
+            "<div class=\"persona_function textarea_preserve %s\">%s</div>",
+            static::getClassInfo(ContentEnum::Function, $display),
+            $affectation->persona->function,
         );
     }
 
@@ -108,6 +135,11 @@ class AffectationDisplay
             $affectation->persona->email,
             $affectation->persona->email
         );
+    }
+
+    public static function filledClass(DisplayData $displayData, ContentEnum $contentEnum): string
+    {
+        return $displayData->isDisplayed($contentEnum) ? "filled" : "";
     }
 
     private static function getClassInfo(ContentEnum $enum, DisplayData $display): string

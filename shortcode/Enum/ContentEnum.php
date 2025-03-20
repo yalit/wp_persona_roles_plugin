@@ -13,6 +13,8 @@ enum ContentEnum: string
     case Phone = "T";
     case Email = "E";
     case Order = "O";
+    case Function = "F";
+    case Civility = "C";
 
     public function display() {
         return match($this) {
@@ -24,6 +26,8 @@ enum ContentEnum: string
             self::Image => 'Image',
             self::Name => 'Nom/Prénom',
             self::Phone => 'Téléphones',
+            self::Civility => 'Civilité',
+            self::Function => 'Fonction',
             default => ''
         };
     }

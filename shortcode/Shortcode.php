@@ -29,7 +29,7 @@ class Shortcode
             }
         }
 
-        $format = FormatEnum::from($this->getAttribute($atts, 'format', 'TABLEAU'));
+        $format = FormatEnum::tryFrom($this->getAttribute($atts, 'format', 'TABLEAU'));
         $affectations = $this->getAffectations($atts);
         $displayData = $this->getDisplayData($atts);
 
@@ -45,6 +45,7 @@ class Shortcode
         return AffectationRepository::findFiltered(
             $this->getAttribute($atts, 'paroisse', null),
             $this->getAttribute($atts, 'groupe', null),
+            $this->getAttribute($atts, 'role', null),
         );
     }
 

@@ -2,6 +2,8 @@
 
 namespace rest;
 
+use WP_REST_Server;
+
 class PersonaRest
 {
     public const BASE_URL = 'persona-roles';
