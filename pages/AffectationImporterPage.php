@@ -25,7 +25,7 @@ class AffectationImporterPage
 
     public function setImportMenu(): void
     {
-        if (!is_admin()) {
+/*        if (!is_admin()) {
             return;
         }
 
@@ -36,7 +36,7 @@ class AffectationImporterPage
             'manage_options',
             PersonaMenu::MENU_NAME . '_import',
             [$this, 'importPage']
-        );
+        );*/
     }
 
     public function importPage(): void
