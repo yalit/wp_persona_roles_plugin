@@ -17,8 +17,8 @@ class ImportToPersonaDataTransformer extends GenericDataTransformer
         return new Persona(
             null,
             sanitize_text_field(static::getProperty($data, 'civilite', "")),
-            sanitize_text_field($surname),
             sanitize_text_field($name),
+            sanitize_text_field($surname),
             sanitize_text_field(static::getProperty($data, 'adresse_mail', "")),
             sanitize_text_field(static::getProperty($data, 'telfixe', "")),
             sanitize_text_field(static::getProperty($data, 'tel', "")),
