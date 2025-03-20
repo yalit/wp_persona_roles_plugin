@@ -2,6 +2,8 @@
 
 namespace types;
 
+use WP_Query;
+
 abstract class AbstractType
 {
     public static function init(): void
@@ -19,6 +21,8 @@ abstract class AbstractType
 
         add_filter( 'manage_'.static::getPostType().'_posts_columns', [$this, 'addColumns']);
         add_action( 'manage_'.static::getPostType().'_posts_custom_column', [$this, 'displayColumns'], 10, 2);
+        add_filter( 'manage_edit-'.static::getPostType().'_sortable_columns', [$this, 'makeColumnsSortable']);
+        add_filter( 'pre_get_posts', [$this, 'sortColumns']);
     }
 
     abstract public static function getPostType(): string;
@@ -28,6 +32,12 @@ abstract class AbstractType
 
     abstract public function addColumns($columns): array;
     abstract public function displayColumns($column_key, $post_id): void;
+    public function makeColumnsSortable($columns): array { return $columns; }
+    public function sortColumns(WP_Query $query):void {}
+    protected function addOrderBy(WP_Query $query, string $metaKey): void {
+        $query->set('meta_key', $metaKey);
+        $query->set('orderby', 'meta_value');
+    }
 
     public static function getFieldId($fieldKey)
     {

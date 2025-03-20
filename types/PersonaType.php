@@ -2,6 +2,8 @@
 
 namespace types;
 
+use WP_Query;
+
 class PersonaType extends AbstractType
 {
 
@@ -89,5 +91,27 @@ class PersonaType extends AbstractType
             <span><?php echo (!empty($rgpd) ? "OUI" : "NON"); ?></span>
         <?php
         }
+    }
+
+
+    public function makeColumnsSortable($columns): array
+    {
+        $columns = parent::makeColumnsSortable($columns);
+
+        $columns['email'] = 'email';
+        $columns['address'] = 'address';
+        $columns['rgpd'] = 'rgpd';
+        return $columns;
+    }
+
+    public function sortColumns(WP_Query $query): void
+    {
+        $type = $query->get('post_type');
+        $orderBy = $query->get('orderby');
+
+        match ($type === static::getPostType() && in_array($orderBy, ['email', 'address', 'rgpd'])) {
+            true => $this->addOrderBy($query, static::getFieldDBId($orderBy)),
+            false => null
+        };
     }
 }

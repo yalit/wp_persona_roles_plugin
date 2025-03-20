@@ -2,6 +2,8 @@
 
 namespace types;
 
+use WP_Query;
+
 class ParishType extends AbstractType
 {
     public static function getPostType(): string 
@@ -52,5 +54,24 @@ class ParishType extends AbstractType
             <?php
         }
     }
-    
+
+    public function makeColumnsSortable($columns): array
+    {
+        $columns = parent::makeColumnsSortable($columns);
+
+        $columns['code'] = 'code';
+        $columns['sequence'] = 'sequence';
+        return $columns;
+    }
+
+    public function sortColumns(WP_Query $query): void
+    {
+        $type = $query->get('post_type');
+        $orderBy = $query->get('orderby');
+
+        match ($type === static::getPostType() && in_array($orderBy, ['code', 'sequence'])) {
+            true => $this->addOrderBy($query, static::getFieldDBId($orderBy)),
+            false => null
+        };
+    }
 }
