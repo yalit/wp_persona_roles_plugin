@@ -41,7 +41,7 @@ class GroupRepository extends AbstractRepository
     {
         $args = [
             'post_type' => GroupType::getPostType(),
-            'nb_per_page' => -1,
+            'posts_per_page' => -1,
             'orderby' => 'meta_value',
             'order' => 'ASC',
             'meta_key' => GroupType::getFieldDBId('name')

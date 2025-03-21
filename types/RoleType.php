@@ -35,17 +35,18 @@ class RoleType extends AbstractType
     public function addColumns($columns): array 
     { 
         unset($columns['date']);
-        $columns['id'] = 'Id';
         $columns['code'] = __('Code', 'persona_user_roles');
         $columns['sequence'] = __('Sequence', 'persona_user_roles');
+        $columns['active'] = 'Actif ?';
         return $columns;
     }
 
     public function displayColumns($column_key, $post_id): void 
     {
-        if ($column_key === 'id') {
+        if ($column_key === 'active') {
+            $value = get_post_meta( $post_id, static::getFieldDBId('active'), true );
             ?>
-            <span><?php echo esc_attr($post_id); ?></span>
+            <span><?php echo esc_attr($value ? "OUI" : "NON"); ?></span>
             <?php
         }
         if ($column_key === 'code') {
@@ -67,7 +68,7 @@ class RoleType extends AbstractType
     {
         $columns = parent::makeColumnsSortable($columns);
 
-        $columns['id'] = 'id';
+        $columns['active'] = 'active';
         $columns['code'] = 'code';
         $columns['sequence'] = 'sequence';
         return $columns;
@@ -78,12 +79,7 @@ class RoleType extends AbstractType
         $type = $query->get('post_type');
         $orderBy = $query->get('orderby');
 
-        if ($orderBy === 'id') {
-            $query->set('orderby', 'ID');
-            return;
-        }
-
-        match ($type === static::getPostType() && in_array($orderBy, ['code', 'sequence'])) {
+        match ($type === static::getPostType() && in_array($orderBy, ['code', 'sequence', 'active'])) {
             true => $this->addOrderBy($query, static::getFieldDBId($orderBy)),
             false => null
         };

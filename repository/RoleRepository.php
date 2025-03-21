@@ -41,10 +41,10 @@ class RoleRepository extends AbstractRepository
     {
         $args = [
             'post_type' => RoleType::getPostType(),
-            'nb_per_page' => -1,
+            'posts_per_page' => -1,
+            'meta_key' => RoleType::getFieldDBId('name'),
             'orderby' => 'meta_value',
             'order' => 'ASC',
-            'meta_key' => RoleType::getFieldDBId('name')
         ];
 
         return static::queryPosts($args, RoleFactory::class);

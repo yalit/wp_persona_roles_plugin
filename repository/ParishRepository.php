@@ -59,7 +59,7 @@ class ParishRepository extends AbstractRepository
     {
         $args = [
             'post_type' => ParishType::getPostType(),
-            'nb_per_page' => -1,
+            'posts_per_page' => -1,
             'orderby' => 'meta_value',
             'order' => 'ASC',
             'meta_key' => ParishType::getFieldDBId('name')
